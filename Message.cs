@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -87,25 +88,18 @@ namespace restart
                     p=messages[i].GetPopularity();
                 }
             }
-            if (messages2.Count==1)
+            switch (messages2.Count)
             {
-                Console.WriteLine("{0} sõnum on populaarsem", messages2[0].Content);
-            }
-            else if (messages2.Count==2)
-            {
-                Console.WriteLine("{0} ja {1} sõnumeid on populaarsem", messages2[0].Content, messages2[1].Content);
-            }
-            else if (messages2.Count==3)
-            {
-                Console.WriteLine("{0}, {1} ja {2} sõnumeid on populaarsem", messages2[0].Content, messages2[1].Content, messages2[2].Content);
-            }
-            else
-            {
-                foreach (Message item in messages2)
-                {
-                    Console.Write("{0}, ",item.Content);
-                }
-                Console.WriteLine("sõnumeid on populaarsem");
+                case 1: Console.WriteLine("{0} sõnum on populaarsem", messages2[0].Content); break;
+                case 2: Console.WriteLine("{0} ja {1} sõnumeid on populaarsem", messages2[0].Content, messages2[1].Content); break;
+                case 3: Console.WriteLine("{0}, {1} ja {2} sõnumeid on populaarsem", messages2[0].Content, messages2[1].Content, messages2[2].Content); break;
+                default:
+                    for (int i = 0; i < messages2.Count - 1; i++)
+                    {
+                        Console.Write("{0}, ", messages2[i].Content);
+                    }
+                    Console.WriteLine("{0} sõnumeid on populaarsem", messages2[messages2.Count-1].Content);
+                    break;
             }
         }
     }

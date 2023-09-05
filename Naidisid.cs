@@ -38,6 +38,7 @@ namespace restart
             {
                 m1.AddLike();
             }
+            m1.ShowInfo();
             m2.ShowInfo();
 
             m1.WhoIsPopularity(m2);
@@ -50,6 +51,39 @@ namespace restart
             list.Add(m4);
             list.Add(m5);
             m1.WhoIsPopularityN(list);
+
+            Console.WriteLine();
+
+            int val = 1;
+            int arv = 0;
+            string autor;
+            string content;
+            Random rand = new Random();
+            int likes;
+            Dictionary<string, Message> autors = new Dictionary<string,Message> ();
+            Console.WriteLine("Mitu autorit luua?\n");
+            arv = Int32.Parse(Console.ReadLine());
+            Console.WriteLine();
+            for (int i = 0; i < arv; i++)
+            {
+                Console.Write("{0}. Autori nimi on - ",i+1);
+                autor = Console.ReadLine();
+                Console.Write("({0}) sõnum - ",autor);
+                content = Console.ReadLine();
+                Message m = new Message(content, autor, DateTime.Now);
+                likes = rand.Next(0,1000);
+                Console.WriteLine("Postitus hakkab inimestele meeldima! Oota natuke..");
+
+                for (int o = 0; o < likes; o++)
+                {
+                    Thread.Sleep(rand.Next(0,3));
+                    m.AddLike();
+                }
+                m.ShowInfo();
+            }
+
+
+            Console.ReadLine();
         }
     }
 }
